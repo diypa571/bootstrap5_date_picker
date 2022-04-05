@@ -1,0 +1,54 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+
+
+<style>
+body {
+min-height: 100vh;
+display: grid;
+place-content: center;
+}
+
+.form-floating > .bi-calendar-date + .datepicker_input + label {
+padding-left: 3.5rem;
+z-index: 3;
+}
+</style>
+
+
+
+
+<input type="text" class="datepicker_input form-control border-2" id="datepicker1" required placeholder="DD/MM/YYYY">
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.1/js/bootstrap.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js'></script>
+
+<script>
+
+const getDatePickerTitle = elem => {
+// From the label or the aria-label
+const label = elem.nextElementSibling;
+let titleText = '';
+if (label && label.tagName === 'LABEL') {
+titleText = label.textContent;
+} else {
+titleText = elem.getAttribute('aria-label') || '';
+}
+return titleText;
+};
+
+const elems = document.querySelectorAll('.datepicker_input');
+for (const elem of elems) {
+const datepicker = new Datepicker(elem, {
+'format': 'yyyy-mm-dd',
+title: getDatePickerTitle(elem) });
+
+}
+//# sourceURL=pen.js
+</script>
