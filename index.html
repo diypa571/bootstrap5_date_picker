@@ -31,24 +31,23 @@ z-index: 3;
 
 <script>
 
-const getDatePickerTitle = elem => {
-// From the label or the aria-label
+const theDatePicker = elem => {
 const label = elem.nextElementSibling;
-let titleText = '';
+let theTitle = '';
 if (label && label.tagName === 'LABEL') {
-titleText = label.textContent;
+theTitle = label.textContent;
 } else {
-titleText = elem.getAttribute('aria-label') || '';
+theTitle = elem.getAttribute('aria-label') || '';
 }
-return titleText;
+return theTitle;
 };
 
-const elems = document.querySelectorAll('.datepicker_input');
-for (const elem of elems) {
+const ElemInput = document.querySelectorAll('.datepicker_input');
+for (const elem of ElemInput) {
 const datepicker = new Datepicker(elem, {
 'format': 'yyyy-mm-dd',
-title: getDatePickerTitle(elem) });
+title: theDatePicker(elem) });
 
 }
-//# sourceURL=pen.js
+ 
 </script>
