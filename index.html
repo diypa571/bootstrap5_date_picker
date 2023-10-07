@@ -26,11 +26,11 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container bg-info p-2 rounded">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mb-4">Select a Date</h2>
-            <div class="mb-3">
+        <div class="col-md-12">
+            <h4 class="text-center mb-4">Select a Date</h4>
+            <div class="mb-3 shadow-lg">
                 <input type="text" class="datepicker_input form-control border-2" id="datepicker1" required placeholder="DD/MM/YYYY">
             </div>
         </div>
@@ -42,31 +42,35 @@
 
 <!-- Datepicker JS -->
 <script src='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js'></script>
-
 <script>
-    const theDatePicker = elem => {
-        const label = elem.nextElementSibling;
-        let theTitle = '';
-        if (label && label.tagName === 'LABEL') {
-            theTitle = label.textContent;
-        } else {
-            theTitle = elem.getAttribute('aria-label') || '';
-        }
-        return theTitle;
-    };
+  const theDatePicker = elem => {
+      const label = elem.nextElementSibling;
+      let theTitle = '';
+      if (label && label.tagName === 'LABEL') {
+          theTitle = label.textContent;
+      } else {
+          theTitle = elem.getAttribute('aria-label') || '';
+      }
+      return theTitle;
+  };
 
-    const ElemInput = document.querySelectorAll('.datepicker_input');
-    for (const elem of ElemInput) {
-        const datepicker = new Datepicker(elem, {
-            'format': 'yyyy-mm-dd',
-            title: theDatePicker(elem)
-        });
-        
-        // Add an event listener to the 'changeDate' event on the input element
-        elem.addEventListener('changeDate', () => {
-            datepicker.hide(); // Hide the datepicker when a date is selected
-        });
-    }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);  // Reset hours, minutes, seconds, and milliseconds to ensure you get the start of today.
+
+  const ElemInput = document.querySelectorAll('.datepicker_input');
+  for (const elem of ElemInput) {
+      const datepicker = new Datepicker(elem, {
+          'format': 'yyyy-mm-dd',
+          title: theDatePicker(elem),
+          minDate: today  // Setting the minDate to today to disable all past dates.
+      });
+
+      // Add an event listener to the 'changeDate' event on the input element
+      elem.addEventListener('changeDate', () => {
+          datepicker.hide();  // Hide the datepicker when a date is selected
+      });
+  }
+
 </script>
 
 </body>
